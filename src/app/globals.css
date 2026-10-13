@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+/*
+ * Tokens do Café Eté
+ * torra  — café torrado, texto principal e fundos escuros
+ * grao   — marrom médio, texto secundário
+ * filtro — papel de filtro, fundo da página
+ * crema  — superfícies e painéis
+ * mar    — verde-mar do canal de Ilhabela, ações e links
+ * mel    — destaque quente, usado só sobre fundo escuro
+ * vinho, framboesa, laranja — cores da marca café.eté (logo e cardápio)
+ */
+@theme {
+  --color-torra: #2b1b13;
+  --color-grao: #5c3b29;
+  --color-filtro: #f5efe5;
+  --color-crema: #eadcc6;
+  --color-crema-escuro: #d9c4a5;
+  --color-mar: #1d4a4b;
+  --color-mar-escuro: #133536;
+  --color-mar-claro: #b9d3cb;
+  --color-mel: #dca95f;
+
+  /* Marca café.eté (logo e cardápio) */
+  --color-vinho: #8a1a4b;
+  --color-vinho-escuro: #6c1239;
+  --color-framboesa: #b22b4d;
+  --color-laranja: #e58c45;
+  --color-rosa-claro: #f3cfd9;
+
+  --radius-cartao: 1.25rem;
+  --radius-painel: 2rem;
+
+  --ease-calma: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@theme inline {
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-filtro);
+    color: var(--color-torra);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-variation-settings: "SOFT" 60, "WONK" 0;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-vinho);
+    outline-offset: 3px;
+    border-radius: 0.375rem;
+  }
+
+  .sobre-escuro :focus-visible {
+    outline-color: var(--color-laranja);
+  }
+
+  ::selection {
+    background: var(--color-rosa-claro);
+    color: var(--color-torra);
+  }
+}
+
+@layer components {
+  .botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.2;
+    text-decoration: none;
+    transition:
+      background-color 180ms var(--ease-calma),
+      color 180ms var(--ease-calma),
+      border-color 180ms var(--ease-calma);
+  }
+
+  .botao svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+  }
+
+  /* Ação principal sobre fundo claro */
+  .botao-primario {
+    background: var(--color-torra);
+    color: var(--color-filtro);
+  }
+  .botao-primario:hover {
+    background: var(--color-vinho);
+  }
+
+  /* Ação secundária sobre fundo claro */
+  .botao-contorno {
+    border: 1.5px solid currentColor;
+    color: var(--color-torra);
+  }
+  .botao-contorno:hover {
+    background: var(--color-torra);
+    border-color: var(--color-torra);
+    color: var(--color-filtro);
+  }
+
+  /* Variantes para fundo escuro */
+  .botao-claro {
+    background: var(--color-filtro);
+    color: var(--color-torra);
+  }
+  .botao-claro:hover {
+    background: var(--color-rosa-claro);
+  }
+
+  .botao-contorno-claro {
+    border: 1.5px solid rgb(245 239 229 / 0.55);
+    color: var(--color-filtro);
+  }
+  .botao-contorno-claro:hover {
+    border-color: var(--color-filtro);
+    background: rgb(245 239 229 / 0.1);
+  }
+
+  .link-texto {
+    color: var(--color-vinho);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.2em;
+  }
+  .link-texto:hover {
+    text-decoration-thickness: 2.5px;
+  }
+
+  .titulo-secao {
+    font-size: clamp(2.1rem, 1.5rem + 2.6vw, 3.4rem);
+    font-weight: 500;
+    font-variation-settings: "SOFT" 80, "WONK" 0, "opsz" 96;
+  }
+}
+
+/* Vapor que vira mar: desenho único na abertura */
+@keyframes desenhar {
+  from {
+    stroke-dashoffset: var(--comprimento, 400);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes subir {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.traco-animado {
+  stroke-dasharray: var(--comprimento, 400);
+  stroke-dashoffset: var(--comprimento, 400);
+  animation: desenhar 2.4s var(--ease-calma) forwards;
+  animation-delay: var(--atraso, 0s);
+}
+
+.vapor-flutua {
+  animation: subir 7s ease-in-out 2.6s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .traco-animado {
+    stroke-dashoffset: 0;
+  }
+}

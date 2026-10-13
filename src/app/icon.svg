@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Ícone provisório (xícara). Substituir pelo logotipo oficial quando a equipe enviar. -->
+  <rect width="64" height="64" rx="16" fill="#2b1b13"/>
+  <path d="M16 28h26v6c0 7-5.5 12-12 12h-2c-6.5 0-12-5-12-12v-6Z" fill="#f5efe5"/>
+  <path d="M42 30.5h2.5a4.5 4.5 0 0 1 0 9H41" fill="none" stroke="#f5efe5" stroke-width="3" stroke-linecap="round"/>
+  <path d="M24 22c-2-3 2-5 0-8M31 22c-2-3 2-5 0-8" fill="none" stroke="#dca95f" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
